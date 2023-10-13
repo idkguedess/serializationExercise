@@ -111,6 +111,22 @@ public class SerializationExercises {
 	public static class Exercise3 {
 
 		public static void main(String[] args) {
+			//Deserialization from ObjectOutputStream
+			try (ObjectInputStream movie1Stream = new ObjectInputStream(new FileInputStream("movie1.ser"));
+				 ObjectInputStream movie2Stream = new ObjectInputStream(new FileInputStream("movie2.ser"));
+				 ObjectInputStream theater1Stream = new ObjectInputStream(new FileInputStream("theater1.ser"));
+				 ObjectInputStream theater2Stream = new ObjectInputStream(new FileInputStream("theater2.ser"));
+				 ObjectInputStream session1Stream = new ObjectInputStream(new FileInputStream("session1.ser"));
+				 ObjectInputStream session2Stream = new ObjectInputStream(new FileInputStream("session2.ser"))) {
 
+				Movie movie1 = (Movie) movie1Stream.readObject();
+				Movie movie2 = (Movie) movie2Stream.readObject();
+				Theatre theater1 = (Theatre) theater1Stream.readObject();
+				Theatre theater2 = (Theatre) theater2Stream.readObject();
+				Session session1 = (Session) session1Stream.readObject();
+				Session session2 = (Session) session2Stream.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
-	}
+		}
