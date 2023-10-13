@@ -5,6 +5,8 @@ import org.example.model.Movie;
 import org.example.model.Session;
 import org.example.model.Theatre;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -73,8 +75,14 @@ public class SerializationExercises {
 	 */
 	public static class Exercise2 {
 
-		public static void main(String[] args) {
-
+		public static void main(String[] args) throws FileNotFoundException {
+			Gson gson = new Gson();
+			Movie movie1 = gson.fromJson(new FileReader("movie1.json"), Movie.class);
+			Movie movie2 = gson.fromJson(new FileReader("movie2.json"), Movie.class);
+			Theatre theatre1 = gson.fromJson(new FileReader("theater1.json"), Theatre.class);
+			Theatre theatre2 = gson.fromJson(new FileReader("theater2.json"), Theatre.class);
+			Session session1 = gson.fromJson(new FileReader("session1.json"), Session.class);
+			Session session2 = gson.fromJson(new FileReader("session2.json"), Session.class);
 		}
 	}
 
@@ -87,4 +95,3 @@ public class SerializationExercises {
 
 		}
 	}
-}
