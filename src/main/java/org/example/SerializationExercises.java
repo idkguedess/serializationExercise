@@ -31,30 +31,38 @@ public class SerializationExercises {
 			Gson gson = new Gson();
 			String movie1Json = gson.toJson(movie1);
 			String movie2Json = gson.toJson(movie2);
+
 			String theater1Json = gson.toJson(theatre1);
 			String theater2Json = gson.toJson(theatre2);
+
 			String session1Json = gson.toJson(session1);
 			String session2Json = gson.toJson(session2);
 
 			try {
 				FileWriter movie1Writer = new FileWriter("movie1.json");
 				FileWriter movie2Writer = new FileWriter("movie2.json");
+
 				FileWriter theater1Writer = new FileWriter("theater1.json");
 				FileWriter theater2Writer = new FileWriter("theater2.json");
+
 				FileWriter session1Writer = new FileWriter("session1.json");
 				FileWriter session2Writer = new FileWriter("session2.json");
 
 				movie1Writer.write(movie1Json);
 				movie2Writer.write(movie2Json);
+
 				theater1Writer.write(theater1Json);
 				theater2Writer.write(theater2Json);
+
 				session1Writer.write(session1Json);
 				session2Writer.write(session2Json);
 
 				movie1Writer.close();
 				movie2Writer.close();
+
 				theater1Writer.close();
 				theater2Writer.close();
+
 				session1Writer.close();
 				session2Writer.close();
 			} catch (IOException e) {
@@ -77,28 +85,36 @@ public class SerializationExercises {
 		public static void main(String[] args) throws FileNotFoundException {
 			//Deserialization from Json
 			Gson gson = new Gson();
+
 			Movie movie1 = gson.fromJson(new FileReader("movie1.json"), Movie.class);
 			Movie movie2 = gson.fromJson(new FileReader("movie2.json"), Movie.class);
+
 			Theatre theatre1 = gson.fromJson(new FileReader("theater1.json"), Theatre.class);
 			Theatre theatre2 = gson.fromJson(new FileReader("theater2.json"), Theatre.class);
+
 			Session session1 = gson.fromJson(new FileReader("session1.json"), Session.class);
 			Session session2 = gson.fromJson(new FileReader("session2.json"), Session.class);
 
 			//Serialization with ObjectOutputStream
 			try (ObjectOutputStream movie1Stream = new ObjectOutputStream(new FileOutputStream("movie1.ser"));
 				 ObjectOutputStream movie2Stream = new ObjectOutputStream(new FileOutputStream("movie2.ser"));
+
 				 ObjectOutputStream theater1Stream = new ObjectOutputStream(new FileOutputStream("theater1.ser"));
 				 ObjectOutputStream theater2Stream = new ObjectOutputStream(new FileOutputStream("theater2.ser"));
+
 				 ObjectOutputStream session1Stream = new ObjectOutputStream(new FileOutputStream("session1.ser"));
 				 ObjectOutputStream session2Stream = new ObjectOutputStream(new FileOutputStream("session2.ser")))
 			{
 
 				movie1Stream.writeObject(movie1);
 				movie2Stream.writeObject(movie2);
+
 				theater1Stream.writeObject(theatre1);
 				theater2Stream.writeObject(theatre2);
+
 				session1Stream.writeObject(session1);
 				session2Stream.writeObject(session2);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -114,15 +130,19 @@ public class SerializationExercises {
 			//Deserialization from ObjectOutputStream
 			try (ObjectInputStream movie1Stream = new ObjectInputStream(new FileInputStream("movie1.ser"));
 				 ObjectInputStream movie2Stream = new ObjectInputStream(new FileInputStream("movie2.ser"));
+
 				 ObjectInputStream theater1Stream = new ObjectInputStream(new FileInputStream("theater1.ser"));
 				 ObjectInputStream theater2Stream = new ObjectInputStream(new FileInputStream("theater2.ser"));
+
 				 ObjectInputStream session1Stream = new ObjectInputStream(new FileInputStream("session1.ser"));
 				 ObjectInputStream session2Stream = new ObjectInputStream(new FileInputStream("session2.ser"))) {
 
 				Movie movie1 = (Movie) movie1Stream.readObject();
 				Movie movie2 = (Movie) movie2Stream.readObject();
+
 				Theatre theater1 = (Theatre) theater1Stream.readObject();
 				Theatre theater2 = (Theatre) theater2Stream.readObject();
+
 				Session session1 = (Session) session1Stream.readObject();
 				Session session2 = (Session) session2Stream.readObject();
 			} catch (IOException | ClassNotFoundException e) {
